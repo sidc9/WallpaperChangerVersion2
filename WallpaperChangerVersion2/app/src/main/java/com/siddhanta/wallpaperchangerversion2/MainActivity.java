@@ -6,12 +6,7 @@ import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.CompoundButton;
-import android.widget.ListView;
-import android.widget.Toast;
 import android.widget.Toolbar;
-
-import java.util.ArrayList;
 
 
 public class MainActivity extends Activity {
@@ -22,9 +17,6 @@ public class MainActivity extends Activity {
     SlidingTabLayout tabs;
     CharSequence Titles[] = {"Home","Events"};
     int NumOfTabs = 2;
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,14 +43,10 @@ public class MainActivity extends Activity {
             }
         });
 
+        Log.d("WallpaperChanger", "Before set view pager");
         tabs.setViewPager(pager);
-
-
-
+        Log.d("WallpaperChanger", "After set view pager");
     }
-
-
-
 
 
 
