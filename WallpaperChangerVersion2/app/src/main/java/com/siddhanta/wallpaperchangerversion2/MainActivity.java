@@ -25,8 +25,10 @@ public class MainActivity extends Activity {
 
         setTitle("Wallpaper Changer");
 
+
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setActionBar(toolbar);
+
 
         adapter = new ViewPagerAdapter(getFragmentManager(),Titles, NumOfTabs);
 
@@ -36,10 +38,13 @@ public class MainActivity extends Activity {
         tabs = (SlidingTabLayout) findViewById(R.id.tabs);
         tabs.setDistributeEvenly(true);
 
+
+
+
         tabs.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
             @Override
             public int getIndicatorColor(int position) {
-                return getResources().getColor(R.color.tabsScrollColor);
+                return getResources().getColor(R.color.tabScrollColor);
             }
         });
 
