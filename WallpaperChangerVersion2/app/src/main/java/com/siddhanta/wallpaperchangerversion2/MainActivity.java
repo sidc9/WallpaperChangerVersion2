@@ -6,6 +6,9 @@ import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.CompoundButton;
+import android.widget.ListView;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 
@@ -17,6 +20,7 @@ public class MainActivity extends Activity {
     SlidingTabLayout tabs;
     CharSequence Titles[] = {"Home","Events"};
     int NumOfTabs = 2;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,4 +80,6 @@ public class MainActivity extends Activity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
 }
