@@ -31,6 +31,7 @@ import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * To be used with ViewPager to provide a tab indicator component which give constant feedback as to
@@ -306,6 +307,8 @@ public class SlidingTabLayout extends HorizontalScrollView {
             if (mViewPagerPageChangeListener != null) {
                 mViewPagerPageChangeListener.onPageSelected(position);
             }
+
+            //Toast.makeText(getContext(),"Selected something" + position,Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -316,6 +319,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
             for (int i = 0; i < mTabStrip.getChildCount(); i++) {
                 if (v == mTabStrip.getChildAt(i)) {
                     mViewPager.setCurrentItem(i);
+                    //Toast.makeText(getContext(),"Clicked something" + getChildCount(),Toast.LENGTH_SHORT).show();
                     return;
                 }
             }

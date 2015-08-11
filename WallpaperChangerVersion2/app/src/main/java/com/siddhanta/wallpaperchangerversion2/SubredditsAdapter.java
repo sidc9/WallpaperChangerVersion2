@@ -73,7 +73,7 @@ public class SubredditsAdapter extends ArrayAdapter<Subreddits>{
 			holder.subName = (TextView) v.findViewById(R.id.subname);
 			holder.chkbox = (CheckBox) v.findViewById(R.id.chk_box);
 			
-			holder.chkbox.setOnCheckedChangeListener((MainActivity) context);
+			//holder.chkbox.setOnCheckedChangeListener((MainActivity) context);
 			
 		} else {
 			holder = (SubsHolder) v.getTag();
@@ -87,3 +87,4 @@ public class SubredditsAdapter extends ArrayAdapter<Subreddits>{
 	}
 
 }
+//*/

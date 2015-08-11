@@ -15,12 +15,16 @@ import android.widget.Toast;
  */
 public class Tab1 extends Fragment {
 
-    Context context11 = getActivity();
+    //Context context11 = (MainActivity) getActivity();
+   // Context context;
     @Override
     public View onCreateView(LayoutInflater inflater,  ViewGroup container, Bundle savedInstanceState) {
+
         View v = inflater.inflate(R.layout.tab_1, container, false);
+        //Toast.makeText(getContext(),"Clicked Tab 1", Toast.LENGTH_SHORT).show();
         return v;
     }
+
 
 
 }

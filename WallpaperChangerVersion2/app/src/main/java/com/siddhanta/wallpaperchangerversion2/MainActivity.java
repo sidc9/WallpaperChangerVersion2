@@ -12,7 +12,7 @@ import android.widget.Toast;
 import android.widget.Toolbar;
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity  {
 
     Toolbar toolbar;
     ViewPager pager;
@@ -20,7 +20,9 @@ public class MainActivity extends Activity {
     SlidingTabLayout tabs;
     CharSequence Titles[] = {"Home","Events"};
     int NumOfTabs = 2;
+    ViewPager.SimpleOnPageChangeListener pageListener;
 
+    myListener listener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,7 @@ public class MainActivity extends Activity {
         tabs = (SlidingTabLayout) findViewById(R.id.tabs);
         tabs.setDistributeEvenly(true);
 
+        pager.setOnPageChangeListener(new myListener(listener));
 
 
 
@@ -82,4 +85,6 @@ public class MainActivity extends Activity {
     }
 
 
+
 }
+
