@@ -15,6 +15,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+// TODO Saved Check box states
+// TODO Add button to add new subs
 
 class Subreddits {
 	
@@ -54,7 +56,7 @@ public class SubredditsAdapter extends ArrayAdapter<Subreddits>{
 		super(context, R.layout.single_listview_item, subsList);
 		this.subsList = subsList;
 		this.context = context;
-		// TODO Auto-generated constructor stub
+
 	}
 	
 
@@ -68,7 +70,7 @@ public class SubredditsAdapter extends ArrayAdapter<Subreddits>{
     SubsHolder holder = new SubsHolder();
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		// TODO Auto-generated method stub
+
 		View v = convertView;
 
 
