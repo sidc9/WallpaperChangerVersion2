@@ -22,7 +22,7 @@ public class MainActivity extends Activity  {
     int NumOfTabs = 2;
     ViewPager.SimpleOnPageChangeListener pageListener;
 
-    myListener listener;
+//    myListener listener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +44,7 @@ public class MainActivity extends Activity  {
         tabs = (SlidingTabLayout) findViewById(R.id.tabs);
         tabs.setDistributeEvenly(true);
 
-        pager.setOnPageChangeListener(new myListener(listener));
+       // pager.setOnPageChangeListener(new myListener(listener));
 
 
 

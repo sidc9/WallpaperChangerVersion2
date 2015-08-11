@@ -1,13 +1,9 @@
-<android.support.v4.view.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/pager"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.siddhanta.wallpaper.MainActivity" > 
-    
-    <RelativeLayout 
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
         
     <CheckBox
         android:id="@+id/chk_box"
@@ -21,9 +17,8 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/chk_box"
         android:textStyle="bold" />
+    <!-- TODO styling of each item -->
     
-    
-    </RelativeLayout>
+</RelativeLayout>
     
 
-</android.support.v4.view.ViewPager>
