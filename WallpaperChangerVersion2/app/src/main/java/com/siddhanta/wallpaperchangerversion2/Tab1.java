@@ -6,6 +6,7 @@ import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,7 @@ public class Tab1 extends Fragment   {
     ListView lv;
     ArrayList<Subreddits> subredditList;
     SubredditsAdapter subAdapter;
+    FloatingActionButton fab;
 
     private Dialog mDialog;
     private AlertDialog mAlertDialog;
@@ -41,6 +43,8 @@ public class Tab1 extends Fragment   {
         lv = (ListView) v.findViewById(R.id.listview);
         //displaySubredditList();
         //Toast.makeText(getContext(),"Clicked Tab 1", Toast.LENGTH_SHORT).show();
+
+        fab = (FloatingActionButton) v.findViewById(R.id.fab);
 
 
 
