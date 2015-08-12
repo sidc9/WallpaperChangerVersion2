@@ -16,7 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 // TODO Saved Check box states
-// TODO Add button to add new subs
+
 
 class Subreddits {
 	
