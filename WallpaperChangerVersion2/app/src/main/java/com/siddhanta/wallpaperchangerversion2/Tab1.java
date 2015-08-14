@@ -3,8 +3,10 @@ package com.siddhanta.wallpaperchangerversion2;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.Fragment;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
@@ -13,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.view.View.OnClickListener;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -35,12 +38,16 @@ public class Tab1 extends Fragment   {
 
     public static String PREFS_NAME = "myprefs";
 
-
+   // DatabaseManager mDatabaseManager = new DatabaseManager(getActivity());
+  //  SQLiteDatabase db = mDatabaseManager.getWritableDatabase();
 
 
     @Override
     public View onCreateView(LayoutInflater inflater,  final ViewGroup container, Bundle savedInstanceState) {
 
+
+        //ContentValues values = new ContentValues();
+       // long newRowId;
 
         subredditList = new ArrayList<Subreddits>();
 
@@ -57,6 +64,23 @@ public class Tab1 extends Fragment   {
         //Toast.makeText(getContext(),"Clicked Tab 1", Toast.LENGTH_SHORT).show();
 
         fab = (FloatingActionButton) v.findViewById(R.id.fab);
+
+        final SubredditsAdapter.SubsHolder vv = new SubredditsAdapter.SubsHolder();
+        vv.subName  = (TextView) v.findViewById(R.id.subname);
+
+
+        vv.subName.setOnLongClickListener(new View.OnLongClickListener() {
+            //TextView vv;
+            //vv = (TextView) v.findViewById(R.id.subname).setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View arg0) {
+                CharSequence name = vv.subName.getText();
+
+                int a = subredditList.indexOf(name);
+                Toast.makeText(getActivity(), "Long Clicked on :" + " at " + "," + a, Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        });//*/
 
 
         v.findViewById(R.id.fab).setOnClickListener(new OnClickListener() {
@@ -86,13 +110,13 @@ public class Tab1 extends Fragment   {
                             addItems(text);
                             mDialog.dismiss();
 
-                            count = count + 1;
-                            prefs_edit.putInt("count",count);
                             prefs_edit.putString(String.valueOf(count), text);
                             prefs_edit.putBoolean(String.valueOf(count) + "_state", true);
+                            count = count + 1;
+                            prefs_edit.putInt("count",count);
                             prefs_edit.commit();
 
-                            Toast.makeText(getActivity(),"Added new " + text + " at position "+count,Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(),"Added new " + text + " at position "+ (count-1),Toast.LENGTH_SHORT).show();
                             //subAdapter.notifyDataSetChanged();
                         }
                     }
@@ -130,10 +154,17 @@ public class Tab1 extends Fragment   {
         if(init){ // if this is the first run
             String listOfsubs[] = {"Earthporn","Winterporn","Summerporn"}; //Default list
 
-            for(int i=0; i<listOfsubs.length; i++){
+            for (int i = 0; i < listOfsubs.length; i++){
                 subredditList.add(new Subreddits(listOfsubs[i], true));
                 prefs_edit.putString(String.valueOf(i), listOfsubs[i]);
-                prefs_edit.putBoolean(String.valueOf(i)+"_state",true);
+                prefs_edit.putBoolean(String.valueOf(i) + "_state", true);
+
+/*                values.put(mDatabaseManager.KEY_NAME, listOfsubs[i]);
+                values.put(mDatabaseManager.KEY_POSITION, i);
+                values.put(mDatabaseManager.KEY_STATE, true);
+
+                newRowId = db.insert(mDatabaseManager.TABLE_NAME,null,values);
+                Toast.makeText(v.getContext(),"Inserted row "+newRowId,Toast.LENGTH_SHORT).show();*/
             }
 
             subAdapter = new SubredditsAdapter(subredditList, getActivity());
@@ -143,7 +174,7 @@ public class Tab1 extends Fragment   {
             prefs_edit.putInt("count",listOfsubs.length);
             prefs_edit.commit();
 
-            Toast.makeText(v.getContext(),"first run",Toast.LENGTH_SHORT).show();
+            Toast.makeText(v.getContext(),"Init",Toast.LENGTH_SHORT).show();
 
         }
         else{
@@ -160,7 +191,7 @@ public class Tab1 extends Fragment   {
             subAdapter = new SubredditsAdapter(subredditList, getActivity());
             lv.setAdapter(subAdapter);
 
-            Toast.makeText(v.getContext(),"Second run" + count,Toast.LENGTH_SHORT).show();
+            Toast.makeText(v.getContext(),"Number of items: " + count,Toast.LENGTH_SHORT).show();
 
         }
 
@@ -194,6 +225,32 @@ public void addItems(String itemName){
 }
 
 
+/*    public static void deleteItem(int position){
+
+        prefs = getContext().getSharedPreferences(PREFS_NAME, 0);
+        prefs_edit = prefs.edit();
+
+        int count = subsList.size();
+        for(int i=position+1; i<count; i++){
+
+            String name = prefs.getString(String.valueOf(i),"err_not_found");
+            boolean check_state = prefs.getBoolean(String.valueOf(i)+"_state",false);
+            subsList.add(i-1,new Subreddits(name,check_state));
+
+            prefs_edit.putString(String.valueOf(i - 1), name);
+            prefs_edit.putBoolean(String.valueOf(i-1)+"_state",check_state);
+        }
+
+        prefs_edit.remove(String.valueOf(count-1));
+        prefs_edit.remove(String.valueOf(count-1)+"_state");
+        count = count-1;
+        prefs_edit.putInt("count", count);
+        prefs_edit.commit();
+
+        Toast.makeText(getContext(), "Deleted: " + position + ", New count : " + count , Toast.LENGTH_SHORT).show();
+
+    }
+
 /*    private void displaySubredditList() {
 
 
@@ -223,6 +280,9 @@ public void addItems(String itemName){
 
 
     }*/
+
+
+
 
 }
 
