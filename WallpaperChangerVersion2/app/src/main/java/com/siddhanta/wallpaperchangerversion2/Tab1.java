@@ -2,7 +2,6 @@ package com.siddhanta.wallpaperchangerversion2;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
@@ -10,11 +9,8 @@ import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 import android.view.View.OnClickListener;
 
 import java.util.ArrayList;
@@ -47,8 +43,8 @@ public class Tab1 extends Fragment   {
         fab = (FloatingActionButton) v.findViewById(R.id.fab);
 
 
-
-        v.findViewById(R.id.button_add).setOnClickListener(new OnClickListener() {
+        v.findViewById(R.id.fab).setOnClickListener(new OnClickListener() {
+            //v.findViewById(R.id.button_add).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
 
@@ -68,10 +64,11 @@ public class Tab1 extends Fragment   {
                     public void onClick(View v) {
                         String text = ((EditText) mDialog.findViewById(R.id.edit_box)).getText().toString();
 
-                        if(text != null && text.compareTo("") != 0) {
-                            subredditList.add(new Subreddits(text));
+                        if (text != null && text.compareTo("") != 0) {
+                            //subredditList.add(new Subreddits(text));
+                            addItems(text);
                             mDialog.dismiss();
-                            subAdapter.notifyDataSetChanged();
+                            //subAdapter.notifyDataSetChanged();
                         }
                     }
                 });
@@ -82,7 +79,14 @@ public class Tab1 extends Fragment   {
             }
         });
 
+
         subredditList = new ArrayList<Subreddits>();
+        addItems("");
+
+
+
+
+        /*subredditList = new ArrayList<Subreddits>();
 
         String listOfsubs[] = {"Earthporn","Winterporn","Summerporn"};
 
@@ -91,13 +95,33 @@ public class Tab1 extends Fragment   {
         }
 
         subAdapter = new SubredditsAdapter(subredditList, getActivity());
-        lv.setAdapter(subAdapter);
+        lv.setAdapter(subAdapter);*/
 
 
         return v;
     }
 
 
+public void addItems(String itemName){
+
+
+
+    String listOfsubs[] = {"Earthporn","Winterporn","Summerporn","4","5","6","7","8","9","10"};
+
+    if(itemName.compareTo("") == 0) {
+        for (int i = 0; i < listOfsubs.length; i++) {
+            subredditList.add(new Subreddits(listOfsubs[i]));
+        }
+    }
+    else{
+        subredditList.add(new Subreddits(itemName));
+        subAdapter.notifyDataSetChanged();
+    }
+
+    subAdapter = new SubredditsAdapter(subredditList, getActivity());
+    lv.setAdapter(subAdapter);
+
+}
 
 
 /*    private void displaySubredditList() {

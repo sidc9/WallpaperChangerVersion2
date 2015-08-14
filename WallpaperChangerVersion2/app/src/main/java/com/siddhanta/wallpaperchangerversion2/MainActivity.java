@@ -1,6 +1,7 @@
 package com.siddhanta.wallpaperchangerversion2;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
@@ -17,6 +18,8 @@ public class MainActivity extends Activity  {
     SlidingTabLayout tabs;
     CharSequence Titles[] = {"Home","Events"};
     int NumOfTabs = 2;
+
+    SharedPreferences prefs;
 
 // TODO Add time/clock thingy
 
@@ -42,7 +45,7 @@ public class MainActivity extends Activity  {
         tabs = (SlidingTabLayout) findViewById(R.id.tabs);
         tabs.setDistributeEvenly(true);
 
-       // pager.setOnPageChangeListener(new myListener(listener));
+
 
 
 
@@ -53,9 +56,11 @@ public class MainActivity extends Activity  {
             }
         });
 
-        Log.d("WallpaperChanger", "Before set view pager");
+
         tabs.setViewPager(pager);
-        Log.d("WallpaperChanger", "After set view pager");
+
+
+
     }
 
 

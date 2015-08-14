@@ -3,6 +3,7 @@
     <color name = "ColorPrimary">#e62117</color>
     <color name = "ColorPrimaryDark">#c31c13</color>
     <color name = "tabScrollColor">@color/white</color>
+    <color name = "fab_button_color">@color/purple</color>
 
 
     <color name="blue" type="color">#FF33B5E5</color>

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
     <style name="AppTheme" parent="android:Theme.Material.Light.NoActionBar">
-        <item name = "android:colorPrimary">@color/ColorPrimary</item>
+        <item name = "colorPrimary">@color/ColorPrimary</item>
         <item name = "android:colorPrimaryDark">@color/ColorPrimaryDark</item>
         <item name = "android:textColorPrimary">@color/white</item>
-        <item name = "android:colorAccent">@color/ColorPrimary</item>
+        <item name = "colorAccent">@color/fab_button_color</item>
+        <item name = "colorControlHighlight">#e62117</item>
 
     </style>
 </resources>

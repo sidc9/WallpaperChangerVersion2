@@ -69,7 +69,7 @@ public class SubredditsAdapter extends ArrayAdapter<Subreddits>{
 
     SubsHolder holder = new SubsHolder();
 	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
+	public View getView(final int position, View convertView, ViewGroup parent) {
 
 		View v = convertView;
 
@@ -102,7 +102,7 @@ public class SubredditsAdapter extends ArrayAdapter<Subreddits>{
                     else
                         p.setSelected(isChecked);
 
-                         Toast.makeText(arg0.getContext(), "Clicked on :" + p.getName() + ", " + isChecked, Toast.LENGTH_SHORT).show();
+                         Toast.makeText(arg0.getContext(), "Clicked on :" + p.getName() + " at "   + "," + position + "," + isChecked, Toast.LENGTH_SHORT).show();
 
                 }
             });
