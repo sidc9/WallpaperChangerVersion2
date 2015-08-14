@@ -4,6 +4,7 @@ import java.util.List;
 
 import android.app.ActionBar;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,11 +22,12 @@ import android.widget.Toast;
 class Subreddits {
 	
 	String name;
-	boolean selected = false;
+	boolean selected;// = true;
 	
-	public Subreddits(String name) {
+	public Subreddits(String name, boolean selected) {
 		super();
 		this.name = name;
+		this.selected = selected;
 	}
 
 	public String getName() {
@@ -50,6 +52,10 @@ public class SubredditsAdapter extends ArrayAdapter<Subreddits>{
 
 	private List<Subreddits> subsList;
 	private Context context;
+
+    public static String PREFS_NAME = "myprefs";
+    SharedPreferences prefs;
+    SharedPreferences.Editor prefs_edit;
 
 
 	public SubredditsAdapter(List<Subreddits> subsList, Context context) {
@@ -102,7 +108,11 @@ public class SubredditsAdapter extends ArrayAdapter<Subreddits>{
                     else
                         p.setSelected(isChecked);
 
-                         Toast.makeText(arg0.getContext(), "Clicked on :" + p.getName() + " at "   + "," + position + "," + isChecked, Toast.LENGTH_SHORT).show();
+                    prefs = getContext().getSharedPreferences(PREFS_NAME,0);
+                    prefs_edit = prefs.edit();
+                    prefs_edit.putBoolean(String.valueOf(position)+"_state",isChecked);
+                    prefs_edit.commit();
+                    Toast.makeText(arg0.getContext(), "Clicked on :" + p.getName() + " at "   + "," + position + "," + isChecked, Toast.LENGTH_SHORT).show();
 
                 }
             });

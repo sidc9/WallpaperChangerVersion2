@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.view.View.OnClickListener;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -27,13 +29,27 @@ public class Tab1 extends Fragment   {
     ArrayList<Subreddits> subredditList;
     SubredditsAdapter subAdapter;
     FloatingActionButton fab;
+    Subreddits subreddit_item;
 
     private Dialog mDialog;
-    private AlertDialog mAlertDialog;
+
+    public static String PREFS_NAME = "myprefs";
+
+
 
 
     @Override
     public View onCreateView(LayoutInflater inflater,  final ViewGroup container, Bundle savedInstanceState) {
+
+
+        subredditList = new ArrayList<Subreddits>();
+
+        final SharedPreferences prefs;
+        final SharedPreferences.Editor prefs_edit;
+
+        prefs = this.getActivity().getSharedPreferences(PREFS_NAME,0);
+        boolean init = prefs.getBoolean("init",true);
+        prefs_edit = prefs.edit();
 
         final View v = inflater.inflate(R.layout.tab_1, container, false);
         lv = (ListView) v.findViewById(R.id.listview);
@@ -66,8 +82,17 @@ public class Tab1 extends Fragment   {
 
                         if (text != null && text.compareTo("") != 0) {
                             //subredditList.add(new Subreddits(text));
+                            int count = prefs.getInt("count",0);
                             addItems(text);
                             mDialog.dismiss();
+
+                            count = count + 1;
+                            prefs_edit.putInt("count",count);
+                            prefs_edit.putString(String.valueOf(count), text);
+                            prefs_edit.putBoolean(String.valueOf(count) + "_state", true);
+                            prefs_edit.commit();
+
+                            Toast.makeText(getActivity(),"Added new " + text + " at position "+count,Toast.LENGTH_SHORT).show();
                             //subAdapter.notifyDataSetChanged();
                         }
                     }
@@ -80,8 +105,8 @@ public class Tab1 extends Fragment   {
         });
 
 
-        subredditList = new ArrayList<Subreddits>();
-        addItems("");
+//        subredditList = new ArrayList<Subreddits>();
+  //      addItems("");
 
 
 
@@ -98,28 +123,73 @@ public class Tab1 extends Fragment   {
         lv.setAdapter(subAdapter);*/
 
 
+
+
+
+
+        if(init){ // if this is the first run
+            String listOfsubs[] = {"Earthporn","Winterporn","Summerporn"}; //Default list
+
+            for(int i=0; i<listOfsubs.length; i++){
+                subredditList.add(new Subreddits(listOfsubs[i], true));
+                prefs_edit.putString(String.valueOf(i), listOfsubs[i]);
+                prefs_edit.putBoolean(String.valueOf(i)+"_state",true);
+            }
+
+            subAdapter = new SubredditsAdapter(subredditList, getActivity());
+            lv.setAdapter(subAdapter);
+
+            prefs_edit.putBoolean("init", false);
+            prefs_edit.putInt("count",listOfsubs.length);
+            prefs_edit.commit();
+
+            Toast.makeText(v.getContext(),"first run",Toast.LENGTH_SHORT).show();
+
+        }
+        else{
+
+            int count = prefs.getInt("count",0);
+            String sub_names;
+            boolean sub_state;
+            for(int i=0; i<count; i++){
+                sub_names = prefs.getString(String.valueOf(i),"err_not_found");
+                sub_state = prefs.getBoolean(String.valueOf(i) + "_state", false);
+                subredditList.add(new Subreddits(sub_names, sub_state));
+            }
+
+            subAdapter = new SubredditsAdapter(subredditList, getActivity());
+            lv.setAdapter(subAdapter);
+
+            Toast.makeText(v.getContext(),"Second run" + count,Toast.LENGTH_SHORT).show();
+
+        }
+
         return v;
     }
 
 
 public void addItems(String itemName){
 
+    SharedPreferences prefs;
+    SharedPreferences.Editor prefs_edit;
 
-
-    String listOfsubs[] = {"Earthporn","Winterporn","Summerporn","4","5","6","7","8","9","10"};
-
-    if(itemName.compareTo("") == 0) {
-        for (int i = 0; i < listOfsubs.length; i++) {
-            subredditList.add(new Subreddits(listOfsubs[i]));
-        }
-    }
-    else{
-        subredditList.add(new Subreddits(itemName));
-        subAdapter.notifyDataSetChanged();
-    }
+    subredditList.add(new Subreddits(itemName, true));
+    subAdapter.notifyDataSetChanged();
 
     subAdapter = new SubredditsAdapter(subredditList, getActivity());
     lv.setAdapter(subAdapter);
+
+    /*prefs = this.getActivity().getSharedPreferences(PREFS_NAME, 0);
+    int count = prefs.getInt("count",0);
+
+    prefs_edit = prefs.edit();
+    prefs_edit.putInt("count",count++);
+    prefs_edit.putString(String.valueOf(count), itemName);
+    prefs_edit.putBoolean(String.valueOf(count) + "_state", true);
+    prefs_edit.commit();
+
+    Toast.makeText(getActivity(),"Added new " + itemName + " at position "+count,Toast.LENGTH_SHORT).show();
+    //*/
 
 }
 

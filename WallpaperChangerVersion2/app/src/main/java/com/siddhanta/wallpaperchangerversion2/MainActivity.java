@@ -9,6 +9,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toolbar;
 
+import java.util.ArrayList;
+
 
 public class MainActivity extends Activity  {
 
@@ -18,6 +20,7 @@ public class MainActivity extends Activity  {
     SlidingTabLayout tabs;
     CharSequence Titles[] = {"Home","Events"};
     int NumOfTabs = 2;
+    ArrayList<Subreddits> subredditList;
 
     SharedPreferences prefs;
 
@@ -58,6 +61,11 @@ public class MainActivity extends Activity  {
 
 
         tabs.setViewPager(pager);
+
+
+
+
+
 
 
 
